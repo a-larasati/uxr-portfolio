@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case Study 01 — Francine Goulde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #FAF8F0; --lavender: #E4DCFF; --lavender-mid: #C9BFEF;
+    --yellow: #FDF5C0; --yellow-mid: #F5E96A; --orange: #F5A623;
+    --sage: #C4DFA0; --sage-dark: #8CB86A;
+    --ink: #1A1814; --ink-soft: #4A4740; --ink-muted: #8A8680;
+    --white: #FFFFFF; --border: rgba(26,24,20,0.1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+  /* ── PASSWORD GATE ── */
+  #gate {
+    position: fixed; inset: 0; z-index: 999;
+    background: var(--lavender);
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+  }
+  .gate-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 3rem 3.5rem;
+    max-width: 420px; width: 100%;
+    text-align: center;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.1);
+  }
+  .gate-lock { font-size: 2.5rem; margin-bottom: 1.25rem; }
+  .gate-title { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.5rem; }
+  .gate-sub { font-size: 0.88rem; color: var(--ink-muted); line-height: 1.6; margin-bottom: 2rem; }
+  .gate-input {
+    width: 100%; padding: 0.9rem 1.25rem;
+    border: 1.5px solid var(--border); border-radius: 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 1rem;
+    background: var(--cream); color: var(--ink);
+    margin-bottom: 0.75rem; outline: none;
+    transition: border-color 0.2s;
+    text-align: center; letter-spacing: 0.1em;
+  }
+  .gate-input:focus { border-color: var(--ink); }
+  .gate-input.error { border-color: #e05252; }
+  .gate-btn {
+    width: 100%; padding: 0.9rem; border: none; border-radius: 12px;
+    background: var(--ink); color: var(--cream);
+    font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 500;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .gate-btn:hover { background: #333; }
+  .gate-error { font-size: 0.8rem; color: #e05252; margin-top: 0.5rem; opacity: 0; transition: opacity 0.2s; }
+  .gate-error.show { opacity: 1; }
+  .gate-back { display: inline-block; margin-top: 1.5rem; font-size: 0.82rem; color: var(--ink-muted); text-decoration: none; }
+  .gate-back:hover { color: var(--ink); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(250,248,240,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-back { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--ink); }
+  .nav-name { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 500; color: var(--ink); text-decoration: none; }
+  .nav-tag { background: var(--lavender); border-radius: 100px; padding: 0.3rem 0.8rem; font-size: 0.72rem; font-weight: 500; color: var(--ink-soft); }
+
+  /* ── HERO ── */
+  .cs-hero {
+    min-height: 60vh; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 9rem 4rem 4rem;
+    background: var(--lavender);
+    position: relative; overflow: hidden;
+  }
+  .cs-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 6px; background: var(--yellow-mid); }
+  .cs-hero-meta { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+  .cs-pill { display: inline-block; border-radius: 100px; padding: 0.35rem 0.9rem; font-size: 0.75rem; font-weight: 500; }
+  .cs-pill-orange { background: var(--orange); color: var(--white); }
+  .cs-pill-white { background: var(--white); color: var(--ink-soft); border: 1px solid var(--border); }
+  .cs-hero-title { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; max-width: 800px; margin-bottom: 1.25rem; }
+  .cs-hero-sub { font-size: 1.1rem; color: var(--ink-soft); max-width: 560px; line-height: 1.7; }
+
+  /* ── CONTENT ── */
+  .cs-body { max-width: 780px; margin: 0 auto; padding: 5rem 2rem; }
+  .cs-section { margin-bottom: 4.5rem; }
+  .cs-section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.85rem; }
+  .cs-section-title { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; margin-bottom: 1.25rem; }
+  .cs-section-title em { font-style: italic; font-weight: 300; }
+  .cs-body-text { font-size: 1rem; line-height: 1.85; color: var(--ink-soft); margin-bottom: 1.25rem; }
+  .cs-body-text strong { color: var(--ink); font-weight: 500; }
+
+  /* Pull quote */
+  .cs-pullquote { background: var(--yellow); border-left: 4px solid var(--orange); padding: 1.5rem 2rem; border-radius: 0 16px 16px 0; margin: 2.5rem 0; }
+  .cs-pullquote p { font-family: 'Fraunces', serif; font-size: 1.2rem; font-style: italic; font-weight: 300; line-height: 1.5; color: var(--ink); }
+
+  /* Image placeholder */
+  .cs-img-placeholder {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--lavender);
+    border: 2px dashed rgba(26,24,20,0.2);
+    border-radius: 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem;
+    margin: 2rem 0;
+    color: var(--ink-muted); font-size: 0.85rem; text-align: center;
+  }
+  .cs-img-placeholder-icon { font-size: 2rem; opacity: 0.4; }
+  .cs-img-caption { font-size: 0.8rem; color: var(--ink-muted); text-align: center; margin-top: -1rem; margin-bottom: 2rem; font-style: italic; }
+
+  /* Step cards */
+  .cs-steps { display: flex; flex-direction: column; gap: 1.25rem; margin: 1.5rem 0; }
+  .cs-step { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1.25rem; align-items: start; }
+  .cs-step-num { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--lavender); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.92rem; color: var(--ink); flex-shrink: 0; }
+  .cs-step-content {}
+  .cs-step-title { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--ink); }
+  .cs-step-desc { font-size: 0.88rem; line-height: 1.65; color: var(--ink-soft); }
+
+  /* Tag grid */
+  .cs-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+  .cs-tag { background: var(--cream); border: 1px solid var(--border); border-radius: 100px; padding: 0.35rem 0.85rem; font-size: 0.8rem; color: var(--ink-soft); }
+  .cs-tag-green { background: var(--sage); border-color: var(--sage); color: var(--ink); }
+
+  /* Outcome cards */
+  .cs-outcomes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+  .cs-outcome-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; }
+  .cs-outcome-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .cs-outcome-title { font-weight: 500; font-size: 0.92rem; margin-bottom: 0.4rem; color: var(--ink); }
+  .cs-outcome-desc { font-size: 0.82rem; line-height: 1.6; color: var(--ink-soft); }
+
+  /* Divider */
+  .cs-divider { width: 48px; height: 3px; background: var(--orange); border-radius: 2px; margin: 0 0 4.5rem; }
+
+  /* Footer */
+  .cs-footer-nav { background: var(--ink); padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+  .cs-footer-next { text-decoration: none; display: flex; align-items: center; gap: 0.75rem; }
+  .cs-footer-next-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,240,0.4); margin-bottom: 0.3rem; }
+  .cs-footer-next-title { font-family: 'Fraunces', serif; font-size: 1.1rem; color: rgba(250,248,240,0.85); }
+  .cs-footer-back { font-size: 0.85rem; color: rgba(250,248,240,0.5); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+  .cs-footer-back:hover { color: rgba(250,248,240,0.85); }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    .cs-hero { padding: 7rem 1.5rem 3rem; }
+    .cs-body { padding: 3rem 1.25rem; }
+    .cs-outcomes { grid-template-columns: 1fr; }
+    .cs-footer-nav { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<!-- TO CHANGE THE PASSWORD: find the line below that says const PASSWORD and update it -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-lock">🔒</div>
+    <h2 class="gate-title">Case Study 01</h2>
+    <p class="gate-sub">This case study is password protected.<br>Enter the password Francine shared with you to continue.</p>
+    <input type="password" class="gate-input" id="gate-input" placeholder="Password" />
+    <p class="gate-error" id="gate-error">Incorrect password. Try again.</p>
+    <button class="gate-btn" onclick="checkPassword()">Enter</button>
+    <a href="index.html" class="gate-back">← Back to portfolio</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Portfolio
+  </a>
+  <a href="index.html" class="nav-name">Francine Goulde</a>
+  <span class="nav-tag">Case Study 01</span>
+</nav>
+
+<!-- HERO -->
+<div class="cs-hero">
+  <div class="cs-hero-meta">
+    <span class="cs-pill cs-pill-orange">Discovery + Evaluative</span>
+    <span class="cs-pill cs-pill-white">Paycom · 2025–2026</span>
+  </div>
+  <h1 class="cs-hero-title">When a Research Request is Really Four Research Studies</h1>
+  <p class="cs-hero-sub">Turning an unfocused stakeholder ask into a strategic, sequenced research program — and building a research partnership along the way.</p>
+</div>
+
+<!-- BODY -->
+<div class="cs-body">
+
+  <!-- OVERVIEW -->
+  <div class="cs-section">
+    <p class="cs-section-label">01 — Overview</p>
+    <h2 class="cs-section-title">The 30-second version</h2>
+    <p class="cs-body-text">Paycom's platform had a bare-bones ATS. The business wanted to invest in it as a real offering. A Senior Designer and PM came to me with prototypes, mockups, and ambitions — and a research request that was trying to do everything at once. Before I could run a single study, I needed to turn one sprawling ask into a research program that would actually answer the right questions in the right order.</p>
+    <p class="cs-body-text">What followed was four sequential studies — a survey, discovery interviews, and two usability studies — each one informing the next. The result: a product roadmap grounded in recruiter behavior, design requirements shaped by real mental models, and a stakeholder team that learned how to collaborate with research rather than just request it.</p>
+    <div class="cs-tags">
+      <span class="cs-tag">Survey · n=50</span>
+      <span class="cs-tag">Discovery interviews</span>
+      <span class="cs-tag">Usability Study ×2</span>
+      <span class="cs-tag">Scoping workshops</span>
+      <span class="cs-tag">Stakeholder mentorship</span>
+      <span class="cs-tag">Dovetail</span>
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- PROBLEM -->
+  <div class="cs-section">
+    <p class="cs-section-label">02 — The Problem</p>
+    <h2 class="cs-section-title">Two problems, not one</h2>
+    <p class="cs-body-text">The surface problem was clear enough: the team needed to understand how recruiters actually use an ATS system — what information they prioritize, what metrics they track, how they evaluate candidates. They also wanted feedback on early design mockups and usability validation of two prototype experiences.</p>
+    <p class="cs-body-text"><strong>But there was a second, less visible problem.</strong> The initial research request was unfocused and overly broad. The Designer and PM weren't sure how to structure their questions or prioritize what they needed to know. This wasn't a gap in their commitment — it was a gap in how they'd been taught to engage with research. Addressing this was just as important as the research itself.</p>
+    <div class="cs-pullquote">
+      <p>"Basically: understand user needs (discovery research) and evaluate the direction (evaluative research) — but framed as a single amorphous ask."</p>
+    </div>
+    <p class="cs-body-text">Proceeding without resolving the scope problem would have produced research that was technically valid but strategically meaningless. We had to fix the ask before we could answer it.</p>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- USERS & AUDIENCE -->
+  <div class="cs-section">
+    <p class="cs-section-label">03 — Users & Audience</p>
+    <h2 class="cs-section-title">Who this was really for</h2>
+    <p class="cs-body-text"><strong>Primary research participants:</strong> Recruiters — professionals who use ATS systems as a core part of their daily workflow. We needed to understand their mental models, the information they prioritize when evaluating candidates, how they structure their sourcing pipelines, and what "good" looks like for outreach and communication management.</p>
+    <p class="cs-body-text"><strong>Internal audience:</strong> A Senior Designer, a PM, and a UX Analyst — the cross-functional team who would act on these findings. A secondary audience expanded to include additional PMs brought into the final readout, increasing organizational exposure across the broader ATS and Talent Management product portfolio.</p>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- ROLE -->
+  <div class="cs-section">
+    <p class="cs-section-label">04 — Role & Responsibilities</p>
+    <h2 class="cs-section-title">What I owned</h2>
+    <p class="cs-body-text">I served as <strong>lead researcher</strong> across all four studies, with responsibility for scoping, study design, participant recruitment, moderation, analysis, and synthesis. I also mentored the UX Analyst — who had limited user research experience — through studies 3 and 4 when my project priorities shifted mid-program, ensuring continuity without sacrificing quality.</p>
+    <p class="cs-body-text">An equal part of my role was building the research partnership itself: educating the Designer and PM on how to engage with research, running working sessions with them throughout the process, and creating the conditions for genuine collaboration rather than a handoff relationship.</p>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- SCOPE & CONSTRAINTS -->
+  <div class="cs-section">
+    <p class="cs-section-label">05 — Scope & Constraints</p>
+    <h2 class="cs-section-title">What we were working with</h2>
+    <p class="cs-body-text">The biggest constraint was the initial scope problem itself — significant upfront time was needed to clarify and reframe the ask before any research could begin. This wasn't time that had been budgeted for, which meant building stakeholder patience alongside the actual research program.</p>
+    <p class="cs-body-text">Partway through the program, my project priorities shifted, requiring a handoff to the UX Analyst for studies 3 and 4. Continuity planning became an unexpected but valuable part of the work.</p>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- PROCESS -->
+  <div class="cs-section">
+    <p class="cs-section-label">06 — Process</p>
+    <h2 class="cs-section-title">Four studies, one <em>thread</em></h2>
+    <p class="cs-body-text">Rather than tackling everything at once, I reframed the work as a sequenced program where each study would build on the one before it. This turned an overwhelming ask into a clear research roadmap — and gave stakeholders a way to see how research evolves as understanding deepens.</p>
+
+    <div class="cs-steps">
+      <div class="cs-step">
+        <div class="cs-step-num">1</div>
+        <div class="cs-step-content">
+          <div class="cs-step-title">Scoping workshops — reframing the ask</div>
+          <div class="cs-step-desc">Held focused sessions with the Designer and PM to understand what they really needed and why. Asked them to separate what they wanted to know from what they needed to decide. This surfaced four distinct question clusters — enough for four distinct studies.</div>
+        </div>
+      </div>
+      <div class="cs-step">
+        <div class="cs-step-num">2</div>
+        <div class="cs-step-content">
+          <div class="cs-step-title">Survey (n=50) — establishing the baseline</div>
+          <div class="cs-step-desc">Focused on essential ATS information, key data fields, and desired inputs. Designed to be broad enough to surface patterns without being so open-ended it generated noise. Results informed which mental models and behaviors were worth exploring in depth.</div>
+        </div>
+      </div>
+      <div class="cs-step">
+        <div class="cs-step-num">3</div>
+        <div class="cs-step-content">
+          <div class="cs-step-title">Discovery interviews — understanding the world</div>
+          <div class="cs-step-desc">Semi-structured sessions focused on recruiter mental models, sourcing behaviors, and expectations for ATS functionality. Looped the Designer and PM into sessions as observers — generating "aha moments" that no readout alone could have produced.</div>
+        </div>
+      </div>
+      <div class="cs-step">
+        <div class="cs-step-num">4</div>
+        <div class="cs-step-content">
+          <div class="cs-step-title">Usability Study 1 — candidate sourcing setup & management</div>
+          <div class="cs-step-desc">Task-based sessions evaluating the prototype for sourcing pipeline setup and candidate management. Interview insights directly shaped the scenarios and success criteria used here.</div>
+        </div>
+      </div>
+      <div class="cs-step">
+        <div class="cs-step-num">5</div>
+        <div class="cs-step-content">
+          <div class="cs-step-title">Usability Study 2 — outreach communication setup & management</div>
+          <div class="cs-step-desc">Evaluated the outreach and campaign creation experience. Mentored the UX Analyst through moderation and analysis for this study as my priorities shifted.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-img-placeholder">
+      <span class="cs-img-placeholder-icon">🖼</span>
+      <span>Add a screenshot of your research plan, FigJam board, or scoping doc here</span>
+    </div>
+    <p class="cs-img-caption">Research plan / scoping framework used to break the initial ask into four studies</p>
+
+    <p class="cs-body-text">Throughout all four studies, I maintained regular syncs with the team to share progress, address recruitment or prototype issues as they arose, and keep stakeholders invested in the process rather than just waiting for the final delivery.</p>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- OUTCOMES -->
+  <div class="cs-section">
+    <p class="cs-section-label">07 — Outcomes & Impact</p>
+    <h2 class="cs-section-title">What <em>moved</em> because of this</h2>
+    <div class="cs-outcomes">
+      <div class="cs-outcome-card">
+        <div class="cs-outcome-icon">🗺</div>
+        <div class="cs-outcome-title">Product direction</div>
+        <div class="cs-outcome-desc">Findings directly influenced the ATS product roadmap and helped define design, feature, and function requirements. The product moved into active design development.</div>
+      </div>
+      <div class="cs-outcome-card">
+        <div class="cs-outcome-icon">📚</div>
+        <div class="cs-outcome-title">Organizational knowledge</div>
+        <div class="cs-outcome-desc">All findings were compiled in Dovetail for org-wide access and future reference — making this research a living resource, not a one-time deliverable.</div>
+      </div>
+      <div class="cs-outcome-card">
+        <div class="cs-outcome-icon">🤝</div>
+        <div class="cs-outcome-title">Research capability</div>
+        <div class="cs-outcome-desc">The Designer gained practical skills in structuring research requests, grouping questions under objectives, and engaging with research as a strategic partner.</div>
+      </div>
+      <div class="cs-outcome-card">
+        <div class="cs-outcome-icon">🌱</div>
+        <div class="cs-outcome-title">Team growth</div>
+        <div class="cs-outcome-desc">The UX Analyst was mentored through studies 3–4, developing hands-on research experience and the ability to carry work forward independently.</div>
+      </div>
+    </div>
+    <div class="cs-img-placeholder">
+      <span class="cs-img-placeholder-icon">🖼</span>
+      <span>Add a screenshot of your Dovetail repository, findings readout, or affinity map here</span>
+    </div>
+    <p class="cs-img-caption">Research findings compiled in Dovetail for org-wide access</p>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- LESSONS -->
+  <div class="cs-section">
+    <p class="cs-section-label">08 — What I Learned</p>
+    <h2 class="cs-section-title">Honest <em>reflection</em></h2>
+    <p class="cs-body-text">The biggest challenge was scope creep at intake — not from a stakeholder trying to be difficult, but from designers who genuinely didn't know how to ask for what they needed. Many feel they should arrive with fully formed research questions, leading to either overly broad asks or delayed collaboration.</p>
+    <p class="cs-body-text">The upfront time spent reframing the ask added time we hadn't planned for. But it led to better outcomes. This experience made clear that the real work wasn't just the research — it was creating the conditions for research to succeed.</p>
+    <div class="cs-pullquote">
+      <p>"The gap wasn't in the team's commitment. It was in how they'd been taught to engage with research. That was fixable — and worth fixing."</p>
+    </div>
+    <p class="cs-body-text">As a result, our research team began actively encouraging designers to come to us earlier in their thinking — even without a polished request — and explored lightweight frameworks to help structure research questions upfront, so we could move faster from intake to execution.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER NAV -->
+<div class="cs-footer-nav">
+  <a href="index.html" class="cs-footer-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back to portfolio
+  </a>
+  <a href="case-study-2.html" class="cs-footer-next">
+    <div>
+      <div class="cs-footer-next-label">Next case study</div>
+      <div class="cs-footer-next-title">16 Designs, 2 Weeks, No Perfect Tool →</div>
+    </div>
+  </a>
+</div>
+
+<script>
+  // TO CHANGE THE PASSWORD: update the value of PASSWORD below
+  const PASSWORD = "research2026";
+
+  function checkPassword() {
+    const input = document.getElementById('gate-input');
+    const error = document.getElementById('gate-error');
+    if (input.value === PASSWORD) {
+      document.getElementById('gate').style.display = 'none';
+    } else {
+      input.classList.add('error');
+      error.classList.add('show');
+      input.value = '';
+      setTimeout(() => { input.classList.remove('error'); }, 1500);
+    }
+  }
+
+  document.getElementById('gate-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') checkPassword();
+    document.getElementById('gate-error').classList.remove('show');
+  });
+</script>
+</body>
+</html>
