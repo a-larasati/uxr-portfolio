@@ -1,6 +1,6 @@
 # Ayu Larasati — UX Research Portfolio
 
-Personal portfolio site for Francine Goulde, Senior UX Researcher. Built with plain HTML, CSS, and vanilla JavaScript — no frameworks, no dependencies, no build step.
+Personal portfolio site for Ayu Larasati, Senior UX Researcher. Built with plain HTML, CSS, and vanilla JavaScript — no frameworks, no dependencies, no build step.
 
 **Live site:** [a-larasati.github.io](https://a-larasati.github.io/uxr-portfolio/)
 
