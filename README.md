@@ -1,8 +1,8 @@
-# Francine Goulde — UX Research Portfolio
+# Ayu Larasati — UX Research Portfolio
 
 Personal portfolio site for Francine Goulde, Senior UX Researcher. Built with plain HTML, CSS, and vanilla JavaScript — no frameworks, no dependencies, no build step.
 
-**Live site:** [yourusername.github.io](https://yourusername.github.io) ← update this once deployed
+**Live site:** [a-larasati.github.io](https://a-larasati.github.io/uxr-portfolio/)
 
 ---
 
@@ -43,7 +43,7 @@ const PASSWORD = "research2026";
 In `index.html`, find the LinkedIn link in the contact section and replace the `href`:
 
 ```html
-<a href="https://linkedin.com/in/your-actual-profile" ...>
+<a href="https://www.linkedin.com/in/your-actual-profile" ...>
 ```
 
 ### Update text content
