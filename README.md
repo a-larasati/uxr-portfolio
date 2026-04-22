@@ -2,7 +2,7 @@
 
 Personal portfolio site for Francine Goulde, Senior UX Researcher. Built with plain HTML, CSS, and vanilla JavaScript — no frameworks, no dependencies, no build step.
 
-**Live site:** [ayu-larasati.github.io](https://ayu-larasati.github.io) ← update this once deployed
+**Live site:** [yourusername.github.io](https://yourusername.github.io) ← update this once deployed
 
 ---
 
