@@ -93,7 +93,11 @@
   .section-title em { font-style: italic; font-weight: 300; }
 
   /* ABOUT */
-  #about { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  #about { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; }
+  .about-left { padding: 7rem 3.5rem 7rem 3rem; }
+  .about-right { position: relative; min-height: 600px; }
+  .about-right img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+  .about-facts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 2rem; }
   .about-body { font-size: 1.05rem; line-height: 1.8; color: var(--ink-soft); margin-bottom: 1.5rem; }
   .highlight-pill { display: inline-block; background: var(--sage); color: var(--ink); font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.8rem; border-radius: 100px; margin-right: 0.4rem; margin-bottom: 0.4rem; }
 
@@ -248,8 +252,8 @@
       <div class="hero-tags">
         <div class="hero-tag">Paycom · Verizon · Capital One</div>
         <div class="hero-tag">Mixed-methods research</div>
-        <div class="hero-tag">UT Austin MS</div>
-        <div class="hero-tag">D&D enthusiast 🎲</div>
+        <div class="hero-tag">UT Austin · M.Sci, Information Sciences</div>
+        <div class="hero-tag">D&D enthusiast 🐉🎲</div>
       </div>
     </div>
   </div>
@@ -257,7 +261,7 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div>
+  <div class="about-left">
     <p class="section-label">About me</p>
     <h2 class="section-title">Hello! <em>I'm Ayu.</em></h2>
     <p class="about-body">
@@ -266,11 +270,6 @@
     <p class="about-body">
       I think of research as wayfinding. My work is about making sure insights actually shape decisions, and building a team's capacity to think like researchers. Whether I'm breaking down silos, reframing a stakeholder's question, or mentoring a junior analyst, I focus on creating clarity that moves things forward.
     </p>
-    <!-- 
-    <p class="about-body" style="font-size:0.92rem; color: var(--ink-muted);">
-      Outside of work: traveling, knitting, playing D&D, and learning Japanese 🎌
-    </p> 
-    -->
     <div style="margin-top:1.25rem;">
       <span class="highlight-pill">Discovery Research</span>
       <span class="highlight-pill">Evaluative Research</span>
@@ -279,54 +278,40 @@
       <span class="highlight-pill">Research Insight Sharing</span>
       <span class="highlight-pill">Workshop Facilitation</span>
     </div>
+    <div class="about-facts-grid">
+      <div class="fact-card">
+        <div class="fact-icon">🏢</div>
+        <div>
+          <div class="fact-label">Recently</div>
+          <div class="fact-value">UX Researcher · Paycom<br><span style="color:var(--ink-muted);font-size:0.82rem;">Previously Verizon, Capital One, Sentier</span></div>
+        </div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🎓</div>
+        <div>
+          <div class="fact-label">Education</div>
+          <div class="fact-value">MS Information Science<br><span style="color:var(--ink-muted);font-size:0.82rem;">UT Austin</span></div>
+        </div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🌐</div>
+        <div>
+          <div class="fact-label">Languages</div>
+          <div class="fact-value">Indonesian (native)<br><span style="color:var(--ink-muted);font-size:0.82rem;">Japanese (conversational)</span></div>
+        </div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">💬</div>
+        <div>
+          <div class="fact-label">My motto</div>
+          <div class="fact-value">"Stay curious, and work with heart."</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="about-facts">
-    <!-- Replace this div with an <img> tag when you have your travel photo ready -->
-    <!-- 
-    <div class="travel-photo-placeholder">
-      <span class="travel-placeholder-icon">📸</span>
-      <span class="travel-placeholder-label">Your travel photo goes here — replace this div with an img tag</span>
-    </div> 
-    -->
-    <div class="fact-card">
-      <div class="fact-icon">🏢</div>
-      <div>
-        <div class="fact-label">Recently</div>
-        <div class="fact-value">UX Researcher · Paycom<br><span style="color:var(--ink-muted);font-size:0.82rem;">Previously at Verizon, Capital One, Sentier Strategic Resources</span></div>
-      </div>
-    </div>
-    <div class="fact-card">
-      <div class="fact-icon">🎓</div>
-      <div>
-        <div class="fact-label">Education</div>
-        <div class="fact-value">MS Information Science + BS Environmental Science<br><span style="color:var(--ink-muted);font-size:0.82rem;">University of Texas at Austin</span></div>
-      </div>
-    </div>
-    <div class="fact-card">
-      <div class="fact-icon">🌐</div>
-      <div>
-        <div class="fact-label">Languages</div>
-        <div class="fact-value">English · Indonesian (native) · Japanese (conversational)</div>
-      </div>
-    </div>
-    <div class="fact-card">
-      <div class="fact-icon">💬</div>
-      <div>
-        <div class="fact-label">My motto</div>
-        <div class="fact-value">"Stay curious, and work with heart."</div>
-      </div>
-    </div>
-    <div class="fact-card">
-      <div class="fact-icon">🎉</div>
-      <div>
-        <div class="fact-label">Outside of work</div>
-        <div class="fact-value">Traveling, knitting, playing D&D, and learning Japanese 🎌</div>
-      </div>
-    </div>
-    <div class="travel-photo-placeholder">
-      <span class="travel-placeholder-icon">📸</span>
-      <span class="travel-placeholder-label">Your travel photo goes here — replace this div with an img tag</span>
-    </div>
+  <div class="about-right">
+    <!-- Replace this img tag's src with your actual travel photo filename -->
+    <img src="travel.jpg" alt="Ayu traveling" />
   </div>
 </section>
 
